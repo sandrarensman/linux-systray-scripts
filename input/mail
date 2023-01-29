@@ -1,0 +1,2 @@
+<mailbox1> || <executable> --profile-directory=Default --app-id=<app-id1>
+<mailbox2> || <executable> "--profile-directory=Profile 1" --app-id=<app-id2>

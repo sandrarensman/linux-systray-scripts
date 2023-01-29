@@ -1,0 +1,7 @@
+<my-cloud-storage-1> || <executable> --profile-directory=Default --app-id=<app-id1>
+Open in <file-explorer> || <executable> <path>
+
+<my-cloud-storage-2> || <executable> "--profile-directory=Profile 1" --app-id=<app-id2>
+Open in browser
+- <page1> || <executable> "--profile-directory=Profile 1" <page-uri1>
+- <page2> || <executable> "--profile-directory=Profile 1" <page-uri2>
