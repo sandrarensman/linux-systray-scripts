@@ -11,14 +11,14 @@ from gi.repository import AppIndicator3, Gtk
 
 
 class Indicator():
-    def __init__(self, name):
-        self.app = name
-        self.dir = Path(__file__).resolve().parent.parent.parent
-        icondir = str(self.dir.joinpath('icons'))
-        iconpath = '{0}/{1}.svg'.format(icondir, name)
+    def __init__(self, filename):
+        self.app = filename.rstrip('.py')
+        self.root_dir = Path(__file__).resolve().parent.parent.parent
+        self.icon_dir = str(self.root_dir.joinpath('icons'))
+        self.icon_path = '{0}/{1}.svg'.format(self.icon_dir, self.app)
         self.indicator = AppIndicator3.Indicator.new(
             self.app,
-            iconpath,
+            self.icon_path,
             AppIndicator3.IndicatorCategory.SYSTEM_SERVICES
         )
         self.indicator.set_status(AppIndicator3.IndicatorStatus.ACTIVE)
@@ -27,21 +27,21 @@ class Indicator():
     def create_menu(self):
         # Create menu items for displaying enabled/quit
         self.menu = Gtk.Menu()
-        self.cmdpath = self.dir.joinpath('input', self.app)
+        self.cmd_path = self.root_dir.joinpath('input', self.app)
         # If there is a corresponding input document, add extra menu items
-        if self.cmdpath.is_file():
+        if self.cmd_path.is_file():
             self.add_commands()
             separator = Gtk.SeparatorMenuItem()
             self.menu.append(separator)
         item_quit = Gtk.MenuItem(label='Quit')
-        item_quit.connect('activate', self.stop)
+        item_quit.connect('activate', self.quit)
         self.menu.append(item_quit)
         self.menu.show_all()
         return self.menu
 
     def add_commands(self):
         last_submenu = None
-        with open(str(self.cmdpath), 'r') as file:
+        with open(str(self.cmd_path), 'r') as file:
             cmd_data = [line.rstrip().split('||') for line in file]
         for cmd in cmd_data:
             cmd_label = cmd[0].strip()
@@ -69,5 +69,5 @@ class Indicator():
     def run_command(self, widget, command):
         subprocess.Popen(['/bin/bash', '-c', command])
 
-    def stop(self, source):
+    def quit(self, source):
         Gtk.main_quit()
