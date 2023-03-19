@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
 import gi
-
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
-import subprocess
-from pathlib import Path
 
 from gi.repository import AppIndicator3, Gtk
+
+import subprocess
+from pathlib import Path
 
 
 class Indicator():
