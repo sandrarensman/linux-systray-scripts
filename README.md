@@ -52,6 +52,7 @@ Custom configurations for device type and button can be set in `/input/trackball
 
 ## Dependencies
 
-pycairo | `python3-cairo`
-PyGObject | `python3-gi`
-Appindicator3 | `gir1.2-appindicator3-0.1`
+```bash
+sudo apt install python3-gi libgirepository1.0-dev python3-cairo libcairo2-dev gir1.2-appindicator3-0.1
+
+```
