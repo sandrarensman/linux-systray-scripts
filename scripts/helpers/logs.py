@@ -9,13 +9,12 @@ gi.require_version('Gtk', '3.0')
 
 from datetime import datetime
 
-logfile = './logfile.log'
+logfile = './systray-scripts.log'
 
 def logger(file):
-    file_name = file.split('/')[-1]
-    logging.basicConfig(filename=logfile, level=logging.DEBUG, 
+    logging.basicConfig(filename=logfile.lstrip('./'), level=logging.DEBUG, 
                         format='%(asctime)s %(levelname)s %(process)d %(name)s %(message)s')
-    return logging.getLogger(file_name)
+    return logging.getLogger(file)
 
 def cleanup_logs():
     if Path(logfile).exists():
